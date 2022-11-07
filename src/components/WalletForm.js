@@ -7,7 +7,7 @@ import fetchAPI from '../services/API';
 class WalletForm extends Component {
   state = {
     value: '',
-    currency: 'BRL',
+    currency: 'USD',
     method: 'Cartão de crédito',
     tag: 'Alimentação',
     description: '',
