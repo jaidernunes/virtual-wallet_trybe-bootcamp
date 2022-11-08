@@ -46,39 +46,35 @@ class Login extends React.Component {
   render() {
     const { isDisabled, email, password } = this.state;
     return (
-      <>
-        <div>Hello, TrybeWallet!</div>
-        <div>Login</div>
-        <form action="">
-          <input
-            type="email"
-            name="email"
-            id="email-input"
-            data-testid="email-input"
-            placeholder="Email"
-            onChange={ this.handleChange }
-            value={ email }
-          />
-          <br />
-          <input
-            type="password"
-            name="password"
-            id="password-input"
-            data-testid="password-input"
-            placeholder="Senha"
-            onChange={ this.handleChange }
-            value={ password }
-          />
-          <br />
-          <button
-            type="button"
-            onClick={ this.loginButton }
-            disabled={ isDisabled }
-          >
-            Entrar
-          </button>
-        </form>
-      </>
+      <form action="">
+        <input
+          type="email"
+          name="email"
+          id="email-input"
+          data-testid="email-input"
+          placeholder="Email"
+          onChange={ this.handleChange }
+          value={ email }
+        />
+        <br />
+        <input
+          type="password"
+          name="password"
+          id="password-input"
+          data-testid="password-input"
+          placeholder="Senha"
+          onChange={ this.handleChange }
+          value={ password }
+        />
+        <br />
+        <button
+          type="button"
+          onClick={ this.loginButton }
+          disabled={ isDisabled }
+        >
+          Entrar
+        </button>
+      </form>
     );
   }
 }
