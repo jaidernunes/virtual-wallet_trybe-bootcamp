@@ -10,6 +10,7 @@ describe('tests the Wallet component', () => {
   const validPassword = '123456';
   const pwInput = 'password-input';
 
+  // mock code from https://stackoverflow.com/questions/62405645/how-to-mock-fetch-when-testing-a-react-app
   beforeEach(() => {
     jest.spyOn(global, 'fetch').mockResolvedValue({
       json: jest.fn().mockResolvedValue(mockData),
@@ -77,35 +78,4 @@ describe('tests the Wallet component', () => {
 
     expect(global.fetch).toHaveBeenCalledTimes(2);
   });
-
-  // it('checks if the expense is saved in global state when the Add button is clicked', () => {
-  //   renderWithRouterAndRedux(<App />);
-  //   const email = screen.getByRole('textbox');
-  //   const password = screen.getByTestId(pwInput);
-  //   const button = screen.getByRole('button', { name: /entrar/i });
-
-  //   userEvent.type(email, validEmail);
-  //   userEvent.type(password, validPassword);
-  //   userEvent.click(button);
-
-  //   const valueInput = screen.getByTestId('value-input');
-  //   const descriptionInput = screen.getByTestId('description-input');
-  //   const addExpButton = screen.getByRole('button', { name: /adicionar despesa/i });
-
-  //   userEvent.type(valueInput, '1');
-  //   userEvent.type(descriptionInput, '2');
-  //   userEvent.click(addExpButton);
-
-  // });
-  // it('checks if there is a', () => {});
-  // it('checks if there is a', () => {});
-  // it('checks if there is a', () => {});
-  // it('checks if there is a', () => {});
-  // it('checks if there is a', () => {});
-  // it('checks if there is a', () => {});
-  // it('checks if there is a', () => {});
-  // it('checks if there is a', () => {});
-  // it('checks if there is a', () => {});
-  // it('checks if there is a', () => {});
-  // it('checks if there is a', () => {});
 });

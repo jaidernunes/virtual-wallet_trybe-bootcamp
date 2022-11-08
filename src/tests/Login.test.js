@@ -87,12 +87,4 @@ describe('tests the Login component', () => {
 
     expect(history.location.pathname).toBe('/carteira');
   });
-  // it('checks if there is a', () => {})
-  // it('checks if there is a', () => {})
-  // it('checks if there is a', () => {})
-  // it('', () => {})
-  // it('', () => {})
-  // it('', () => {})
-  // it('', () => {})
-  // it('', () => {})
 });
