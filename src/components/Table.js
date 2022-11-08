@@ -1,11 +1,27 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
+import { actionCreator, deleteExpenseObj } from '../redux/actions';
 
 class Table extends Component {
+  deleteExpense = ({ target }) => {
+    const { dispatch, expenses } = this.props;
+    const idToDelete = Number(target.id);
+    console.log(idToDelete);
+    // console.log(expenses);
+
+    // const expenseArr = expenses.splice(idToDelete, 1);
+    // delete expenses[idToDelete];
+    const expenseArr = expenses.filter((expense) => (expense.id !== idToDelete));
+
+    console.log(expenseArr);
+
+    dispatch(actionCreator(deleteExpenseObj, expenseArr));
+  };
+
   render() {
     const { expenses } = this.props;
-    console.log(expenses);
+    // console.log(expenses);
 
     return (
       <table>
@@ -37,7 +53,16 @@ class Table extends Component {
                 ).toFixed(2) }
               </td>
               <td>{Number(expense.exchangeRates[expense.currency].ask).toFixed(2)}</td>
-              <td>Edit/Delete</td>
+              <td>
+                <button
+                  type="button"
+                  data-testid="delete-btn"
+                  id={ expense.id }
+                  onClick={ this.deleteExpense }
+                >
+                  Excluir
+                </button>
+              </td>
             </tr>
           ))}
         </tbody>
@@ -47,7 +72,7 @@ class Table extends Component {
 }
 
 Table.propTypes = {
-  // dispatch: PropTypes.func.isRequired,
+  dispatch: PropTypes.func.isRequired,
   // currencies: PropTypes.arrayOf(PropTypes.string).isRequired,
   expenses: PropTypes.arrayOf(PropTypes.objectOf(PropTypes.string)).isRequired,
 };

@@ -33,11 +33,11 @@ class WalletForm extends Component {
 
   addExpense = async () => {
     const { value, currency, method, tag, description } = this.state;
-    const { expenses, dispatch } = this.props;
+    const { dispatch, expenses } = this.props;
 
-    console.log(expenses.length);
+    // console.log(expenses.length);
     const data = await fetchAPI();
-    console.log(data);
+    // console.log(data);
 
     const expenseObj = {
       id: expenses.length,
@@ -48,8 +48,6 @@ class WalletForm extends Component {
       tag,
       exchangeRates: data,
     };
-
-    console.log(expenseObj);
 
     dispatch(actionCreator(addExpenseObj, expenseObj));
 
