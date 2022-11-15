@@ -8,9 +8,18 @@ const initialWallet = {
 
 const walletReducer = (state = initialWallet, action) => {
   switch (action.type) {
-  case 'deleteExpenseObj':
+  case 'editExpenseObj':
     return {
       ...state,
+      // expenses: action.payload,
+      editor: true,
+      idToEdit: action.payload,
+    };
+
+  case 'addEditedExpenseObj':
+    return {
+      ...state,
+      editor: false,
       expenses: action.payload,
     };
 
@@ -18,6 +27,12 @@ const walletReducer = (state = initialWallet, action) => {
     return {
       ...state,
       expenses: [...state.expenses, action.payload],
+    };
+
+  case 'deleteExpenseObj':
+    return {
+      ...state,
+      expenses: action.payload,
     };
 
   case 'fetchedCurrencies':

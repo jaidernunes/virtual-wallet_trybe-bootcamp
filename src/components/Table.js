@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import { actionCreator, deleteExpenseObj } from '../redux/actions';
+import { actionCreator, deleteExpenseObj, editExpenseObj } from '../redux/actions';
 
 class Table extends Component {
   deleteExpense = ({ target }) => {
@@ -17,6 +17,21 @@ class Table extends Component {
     console.log(expenseArr);
 
     dispatch(actionCreator(deleteExpenseObj, expenseArr));
+  };
+
+  editExpense = ({ target }) => {
+    const { dispatch } = this.props;
+    // const idToDelete = Number(target.id);
+    const idForEdit = Number(target.id);
+    console.log(idForEdit);
+    dispatch(actionCreator(editExpenseObj, idForEdit));
+    // console.log(expenses);
+
+    // const expenseArr = expenses.splice(idToDelete, 1);
+    // delete expenses[idToDelete];
+    // const expenseArr = expenses.filter((expense) => (expense.id !== idToDelete));
+
+    // console.log(expenseArr);
   };
 
   render() {
@@ -62,6 +77,14 @@ class Table extends Component {
                 >
                   Excluir
                 </button>
+                <button
+                  type="button"
+                  data-testid="edit-btn"
+                  id={ expense.id }
+                  onClick={ this.editExpense }
+                >
+                  Editar
+                </button>
               </td>
             </tr>
           ))}
@@ -72,14 +95,18 @@ class Table extends Component {
 }
 
 Table.propTypes = {
-  dispatch: PropTypes.func.isRequired,
   // currencies: PropTypes.arrayOf(PropTypes.string).isRequired,
+  dispatch: PropTypes.func.isRequired,
   expenses: PropTypes.arrayOf(PropTypes.objectOf(PropTypes.string)).isRequired,
+  // editor: PropTypes.bool.isRequired,
+  // idToEdit: PropTypes.number.isRequired,
 };
 
 const mapStateToProps = ({ wallet }) => ({
   // currencies: wallet.currencies,
   expenses: wallet.expenses,
+  // editor: wallet.editor,
+  // idToEdit: wallet.idToEdit,
 });
 
 export default connect(mapStateToProps)(Table);

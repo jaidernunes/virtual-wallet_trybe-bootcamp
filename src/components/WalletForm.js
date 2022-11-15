@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { actionCreator, fetchedCurrencies, addExpenseObj } from '../redux/actions';
+import { actionCreator,
+  fetchedCurrencies, addExpenseObj, addEditedExpenseObj } from '../redux/actions';
 import fetchAPI from '../services/API';
 
 class WalletForm extends Component {
@@ -49,6 +50,7 @@ class WalletForm extends Component {
       exchangeRates: data,
     };
 
+    console.log(expenseObj);
     dispatch(actionCreator(addExpenseObj, expenseObj));
 
     this.setState({
@@ -57,8 +59,38 @@ class WalletForm extends Component {
     });
   };
 
+  addEditedExpense = async () => {
+    const { value, currency, method, tag, description } = this.state;
+    const { dispatch, expenses, idToEdit } = this.props;
+
+    // console.log(expenses.length);
+    const data = await fetchAPI();
+    // console.log(data);
+
+    const expenseObj = {
+      id: idToEdit,
+      value,
+      description,
+      currency,
+      method,
+      tag,
+      exchangeRates: data,
+    };
+
+    // Arr edit method from https://stackoverflow.com/questions/5915789/how-to-replace-item-in-array
+    const editedArr = expenses.map((exps) => (exps.id !== idToEdit ? exps : expenseObj));
+    console.log(editedArr);
+
+    dispatch(actionCreator(addEditedExpenseObj, editedArr));
+
+    this.setState({
+      description: '',
+      value: '',
+    });
+  };
+
   render() {
-    const { currencies } = this.props;
+    const { currencies, editor } = this.props;
     const { value, currency, method, tag, description } = this.state;
 
     return (
@@ -135,12 +167,20 @@ class WalletForm extends Component {
           </select>
         </label>
 
-        <button
-          type="button"
-          onClick={ this.addExpense }
-        >
-          Adicionar despesa
-        </button>
+        {editor ? (
+          <button
+            type="button"
+            onClick={ this.addEditedExpense }
+          >
+            Editar despesa
+          </button>)
+          : (
+            <button
+              type="button"
+              onClick={ this.addExpense }
+            >
+              Adicionar despesa
+            </button>)}
       </form>
     );
   }
@@ -150,11 +190,15 @@ WalletForm.propTypes = {
   dispatch: PropTypes.func.isRequired,
   currencies: PropTypes.arrayOf(PropTypes.string).isRequired,
   expenses: PropTypes.arrayOf(PropTypes.objectOf(PropTypes.string)).isRequired,
+  editor: PropTypes.bool.isRequired,
+  idToEdit: PropTypes.number.isRequired,
 };
 
 const mapStateToProps = ({ wallet }) => ({
   currencies: wallet.currencies,
   expenses: wallet.expenses,
+  editor: wallet.editor,
+  idToEdit: wallet.idToEdit,
 });
 
 export default connect(mapStateToProps)(WalletForm);
