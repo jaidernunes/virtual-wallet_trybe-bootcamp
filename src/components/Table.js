@@ -8,10 +8,7 @@ class Table extends Component {
     const { dispatch, expenses } = this.props;
     const idToDelete = Number(target.id);
     console.log(idToDelete);
-    // console.log(expenses);
 
-    // const expenseArr = expenses.splice(idToDelete, 1);
-    // delete expenses[idToDelete];
     const expenseArr = expenses.filter((expense) => (expense.id !== idToDelete));
 
     console.log(expenseArr);
@@ -21,22 +18,13 @@ class Table extends Component {
 
   editExpense = ({ target }) => {
     const { dispatch } = this.props;
-    // const idToDelete = Number(target.id);
     const idForEdit = Number(target.id);
     console.log(idForEdit);
     dispatch(actionCreator(editExpenseObj, idForEdit));
-    // console.log(expenses);
-
-    // const expenseArr = expenses.splice(idToDelete, 1);
-    // delete expenses[idToDelete];
-    // const expenseArr = expenses.filter((expense) => (expense.id !== idToDelete));
-
-    // console.log(expenseArr);
   };
 
   render() {
     const { expenses } = this.props;
-    // console.log(expenses);
 
     return (
       <table>
@@ -55,7 +43,7 @@ class Table extends Component {
         </thead>
         <tbody>
           {expenses.map((expense) => (
-            <tr key={ expense.id }>
+            <tr key={ expense.id } data-testid={ `tr${expense.id}` }>
               <td>{ expense.description }</td>
               <td>{ expense.tag }</td>
               <td>{ expense.method }</td>
