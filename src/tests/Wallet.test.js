@@ -135,11 +135,8 @@ describe('tests the Wallet component', () => {
     userEvent.click(button);
 
     const addExpButton = screen.getByRole('button', { name: /adicionar despesa/i });
-    // const descInput = screen.getByTestId('description-input');
-    // userEvent.type(descInput, 'test');
     userEvent.click(addExpButton);
 
-    // const testDesc = await screen.findByText('test');
     const deleteExp = await screen.findByText('Excluir');
     expect(deleteExp).toBeInTheDocument();
     userEvent.click(deleteExp);

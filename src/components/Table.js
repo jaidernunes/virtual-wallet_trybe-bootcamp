@@ -83,18 +83,12 @@ class Table extends Component {
 }
 
 Table.propTypes = {
-  // currencies: PropTypes.arrayOf(PropTypes.string).isRequired,
   dispatch: PropTypes.func.isRequired,
   expenses: PropTypes.arrayOf(PropTypes.objectOf(PropTypes.string)).isRequired,
-  // editor: PropTypes.bool.isRequired,
-  // idToEdit: PropTypes.number.isRequired,
 };
 
 const mapStateToProps = ({ wallet }) => ({
-  // currencies: wallet.currencies,
   expenses: wallet.expenses,
-  // editor: wallet.editor,
-  // idToEdit: wallet.idToEdit,
 });
 
 export default connect(mapStateToProps)(Table);

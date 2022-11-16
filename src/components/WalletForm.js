@@ -36,9 +36,7 @@ class WalletForm extends Component {
     const { value, currency, method, tag, description } = this.state;
     const { dispatch, expenses } = this.props;
 
-    // console.log(expenses.length);
     const data = await fetchAPI();
-    // console.log(data);
 
     const expenseObj = {
       id: expenses.length,
@@ -63,9 +61,7 @@ class WalletForm extends Component {
     const { value, currency, method, tag, description } = this.state;
     const { dispatch, expenses, idToEdit } = this.props;
 
-    // console.log(expenses.length);
     const data = await fetchAPI();
-    // console.log(data);
 
     const expenseObj = {
       id: idToEdit,
